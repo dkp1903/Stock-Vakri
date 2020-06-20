@@ -1,0 +1,10 @@
+.dropdown:hover .dropdown-content { display: block; border-radius: 5px;}
+
+::ng-deep .chart {
+    background-color: rgb(18, 55, 68) !important;
+    color:  rgb(252, 252, 252) !important;
+    }
+
+    .btn:hover{
+        font-weight:700;
+    }

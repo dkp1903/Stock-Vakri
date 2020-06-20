@@ -1,0 +1,94 @@
+<div id="dash" style="margin-left:50px;margin-top: 0px;margin-right: 50px;">
+
+    <app-navbar2 [tab]="flag"></app-navbar2>
+    <br>
+    <div class="ui-g ui-fluid">
+        <!-- style="width: 15%; float: left" -->
+        <div class="ui-g-12 ui-md-2" >
+            <p-card header="Hi, {{nameofuser}}!" [styleClass]="'you'">
+                <div style="margin-bottom: 15px;">
+                    Good to see you at work.
+                </div>
+            </p-card>
+        </div>
+
+         <!-- style="width: 16%;display: inline-block;margin-left:2%;margin-right:2%" -->
+         <div class="ui-g-12 ui-md-2 ui-nopad" >
+            <!-- [style]="{width:'100%'}" -->
+            <p-card  header="New Client!" >
+                <div>
+                    <button type="text" (click)="display = !display" pButton icon="fa-external-link-square" label="Show"
+                    class="btn" style="background-color:rgb(18, 55, 68); color:white;
+                    margin-bottom: 10px;">
+                    Register Client</button>
+                </div>
+            </p-card>
+        </div>
+
+        <!-- style="width: 65%; float: right;" -->
+        <div class="ui-g-12 ui-md-8">
+            <!-- "[style]="{width:'100%',float: 'right'}" -->
+        <p-card  header="Log your trades in three clicks here.">
+            <div>
+                <form enctype="multipart/form-data" (submit) = "onTradeSubmit()">
+
+                        <button type="submit" class="btn" style="background-color:rgb(18, 55, 68);          color:white;
+                        margin-bottom:10px;">
+                            <a href="../../assets/template.csv" style="color: white;" download >Download Template</a>
+                        </button>
+                    &nbsp;&nbsp;
+
+                        <span class="btn btn-primary btn-file" style="background-color:rgb(18, 55, 68); color:white;
+                        margin-bottom:10px;">
+                            <input type="file" (change)="fileupload($event.target.files)">
+                        </span>
+
+                    &nbsp;&nbsp;
+
+                    <button type="submit" class="btn" style="background-color:rgb(18, 55, 68); color:white;
+                        margin-bottom:10px;">
+                        Upload File
+                    </button>
+                </form>
+            </div>
+        </p-card>
+        </div>
+    </div>
+</div>
+
+<!-- Dialog content here -->
+<p-dialog header="Register New Client" [(visible)]="display"  (onHide)="close()" [style]="{width: '50vw'}">
+    <form (submit) = "onClientSubmit()">
+      <div class="form-group">
+        <label for="BrokerID">Your Broker ID</label>
+        <input type="text" [(ngModel)]="BrokerID" name="BrokerID" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="ClientID">New Client's ID</label>
+        <input type="text"  [(ngModel)]="ClientID" name="ClientID" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="ClientName">Client's Name</label>
+        <input type="text"  [(ngModel)]="ClientName" name="ClientName" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="MobileNo">Mobile No.</label>
+        <input type="text"  [(ngModel)]="MobileNo" name="MobileNo" class="form-control">
+      </div>
+      <div class="form-group">
+          <button type="submit" class="btn" style="background-color:rgb(18, 55, 68); color:white">Submit</button>
+    </div>
+    </form>
+
+</p-dialog>
+
+<app-candlestick></app-candlestick>
+
+
+
+
+
+

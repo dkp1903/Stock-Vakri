@@ -1,0 +1,144 @@
+<div id="dash" style="margin:50px;margin-top: 0px;margin-right: 50px;">
+
+
+<app-navbar2 [tab]="flag"></app-navbar2>
+<br>
+
+<div *ngIf="clients.length!=0;  else elseBlock"
+     class="client-container">
+    
+    <div class="header">
+        <h1>Client Administrator</h1>
+    </div>
+
+    <p-table #tt 
+            [columns]="cols" 
+            [value]="clients" 
+            [paginator]="true" [rows]="10" [first]="first"   
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            dataKey="ClientID"
+            styleClass="ui-table-clients"
+            [rowHover]="true"
+            [autoLayout]="true">
+            <ng-template pTemplate="caption">
+                <div>
+                    <i class="pi pi-search" ></i>  
+                    <input type="text" 
+                        placeholder="search here..." 
+                        (input)="tt.filterGlobal($event.target.value, 'contains')">
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header"  let-columns>
+                <tr>
+                    <th style="width: 3.0em"></th>
+                    <th *ngFor="let col of columns"
+                        [pSortableColumn]="col.field"
+                        [ngSwitch]="col.field">
+                        <i *ngSwitchCase="'ClientID'" class="pi pi-id-card"></i>
+                        <i *ngSwitchCase="'ClientName'" class="pi pi-users"></i>
+                        <i *ngSwitchCase="'MobileNo'" class="pi pi-mobile"></i>
+                        <i *ngSwitchCase="'Profit'"class="pi pi-dollar"></i>
+                        {{col.header}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body"
+                        let-rowData
+                        let-columns="columns"
+                        let-expanded="expanded">
+                <tr>
+                    <td>
+                        <a href="#" [pRowToggler]="rowData">
+                        <i [ngClass]="expanded ? 'pi pi-ellipsis-v' :'pi pi-list'"></i>
+                        </a>
+                    </td>
+                    <td *ngFor="let col of columns" 
+                        [ngClass]="(col.field==='Profit')  ? (rowData.Profit>=0 ?'profit':'loss') : null"
+                        [ngSwitch]="col.field">
+                        <div *ngSwitchCase="'ClientID'">{{rowData[col.field]}}</div>
+                        <div *ngSwitchCase="'ClientName'">{{rowData[col.field]}}</div>
+                        <div *ngSwitchCase="'MobileNo'">{{rowData[col.field]}}</div>
+                        <div *ngSwitchCase="'Profit'">{{Profits[rowData.ClientID]}}</div>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="rowexpansion" 
+                         let-rowData 
+                         let-columns="columns">
+            <tr>
+            <td [attr.colspan]="columns.length + 1">
+                <div class="ui-g ui-fluid" 
+                     style="font-size:16px;padding:20px">
+                    <div class="ui-g-12 ui-md-6">
+                        <p-table [columns]="cols1"
+                                 [value]="stocks[rowData.ClientID]"
+                                 [autoLayout]="true">
+                            <ng-template pTemplate="header"
+                                        let-columns>
+                            <tr>
+                            <th *ngFor="let col of columns"                              [pSortableColumn]="col.field"
+                                [ngSwitch]="col.field">
+                                    
+                                {{col.header}}
+                                <p-sortIcon [field]="col.field"></p-sortIcon> 
+                            </th>
+                            </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" 
+                                        let-rowData1 
+                                        let-columns="columns">
+                                <tr>
+                                <td *ngFor="let col of columns" 
+                                    [ngSwitch]="col.field">
+                                    <div *ngSwitchCase="'StockID'">{{ rowData1[col.field] }}</div>
+                                    <div *ngSwitchCase="'Quantity'">{{ rowData1[col.field] }}</div>
+                                    <div *ngSwitchCase="'DateofTrade'">{{ rowData1[col.field] }}</div>
+                                    <div *ngSwitchCase="'BuyPrice'">{{ rowData1[col.field] }}</div>
+                                    <div *ngSwitchCase="'LivePrice'">
+                                    {{ StockDict[rowData1['StockID']] }}
+                                    </div>
+                                </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                    <div class="ui-g-12 ui-md-6"
+                        style="text-align:right" >
+                        <!-- Charts here -->
+                    <div [ngClass]="chart">
+                    <google-chart #chart
+                        [type]="type"
+                        [data]= "ChartDict[rowData.ClientID].chrtData"
+                        [columns] ="columns2"
+                        [options]="options"
+                        [width]="width"
+                        [height]="height">
+                    </google-chart>
+                    </div>
+                    </div>
+                </div>
+            </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <p>Total {{clients?.length}} clients</p>
+        </ng-template>
+    </p-table>
+</div>
+<ng-template #elseBlock>
+    <p-card  header="Hey there, please wait for a few seconds ... ">
+        The page will redirect in a few minutes. If it doesn't please go add clients to your profile.
+        <br><br><br>
+        <a [routerLink]="['/dashboard']">
+            <button type="submit"
+                    class="btn"
+                    style="background-color:rgb(18, 55, 68); color:white">
+                    Back to Dashboard
+            </button>
+         </a> 
+    </p-card>
+         
+</ng-template>
+</div>

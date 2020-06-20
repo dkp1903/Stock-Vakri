@@ -1,0 +1,42 @@
+/* Add application styles & imports to this file! */
+
+
+:host ::ng-deep .ui-table-clients{
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+
+    border-radius: 2px;
+}
+
+:host ::ng-deep tr:hover{
+   background-color:#f0eaea !important;
+   font-weight: bolder !important;
+}
+:host ::ng-deep .pi{
+   color:black !important;
+}
+.profit{ 
+   color: darkgreen !important;
+}
+.loss{
+   color:darkred !important;
+}
+.profit:hover{
+   font-weight: bolder;
+}
+.loss:hover{
+   font-weight:bolder;
+}
+.header{
+   background-color: rgb(0, 8, 10);
+   color: white;
+   font-size: x-large;
+   text-align:Center;
+   height:100px;
+   padding-top:15px;
+}
+h1:hover{
+   font-weight: 900;
+}
+.text-container{
+   font-size: xx-large;
+}

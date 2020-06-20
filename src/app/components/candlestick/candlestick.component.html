@@ -1,0 +1,104 @@
+<div id="dash"  style="margin:50px">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-3" >
+      <p-card>
+          <div class="wrapper-1">
+                  <div>
+                    <p class="lead" style="font-size: medium;"><strong>Select Stock: </strong></p>
+                      <select
+                        [(ngModel)] = "defaultStock"
+                        (ngModelChange) = 'catcher($event)'>
+                          <option
+                            *ngFor="let s of stocks"
+                            [value]="s.symbol">
+                            <p >{{s.name}}</p>
+                          </option>
+                      </select>
+                  </div>
+                  <div><br>
+                    <p class="lead" style="font-size: medium;"><strong>Or add one:</strong></p>
+                    <form (submit) = 'addStock()'>
+                          <div class="form-group">
+                            <label for="symbol" >Symbol</label>
+                            <input type="text" [(ngModel)]="symbol" name="symbol" class="form-control">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text"  [(ngModel)]="name" name="name" class="form-control">
+                          </div>
+                          <div>
+                            <button type="submit"  class="btn" style="background-color:rgb(18, 55, 68); color:white">Submit</button>
+                          </div>
+
+                          </form>
+
+                  </div>
+                  <br>
+
+                    <div>
+                      <p class="lead" style="font-size: medium;">Download the data in CSV</p><br>
+
+                        <button (click) = 'download()' class="btn" style="background-color:rgb(18, 55, 68); color:white" >Download</button>
+                    </div><br>
+
+              </div>
+
+        </p-card>
+        <p-card>
+          <div>
+            <p class="lead" style="padding: 5%;border-radius: 5px; background-color:black; color:white ; font-size: medium;">We predict the next closing price to go: <strong>{{prediction}}</strong></p>
+          </div>
+        </p-card>
+        <p-card>
+          <p class="lead" style="font-size: medium;">Find the latest market insights. Click below!</p><br>
+          <a  type="news" class="btn btn-default" [routerLink]="['/news']">News</a>
+          </p-card>
+      </div>
+
+    <div class="ui-g-12 ui-md-9 ui-g-nopad" >
+
+      <p-card [styleClass]="'chart'" >
+        <div>
+          <p class="lead" style="text-align: center;font-size: small; ">Displaying stock performance of: {{defaultStock}}</p>
+
+          <p class="lead" style="text-align: center; font-size: small; ">The max closing price for <b>{{currStock}}</b> stock is: {{max}} at {{maxTime}}</p>
+          <p class="lead" style="text-align: center; font-size: small; ">The min closing price for <b>{{currStock}}</b> stock is: {{min}} at {{minTime}}</p>
+          <p id = "chart-type" class="lead" style="text-align: center;font-size: small; ">Type: {{type}}</p>
+          <div class="ui-g ui-fluid">
+              <div class="ui-g-6" style="text-align: center;">
+                <button type="button" (click)='showLine()' class="btn" style="background-color:rgb(12, 15, 15); color:white;">LineChart&nbsp;</button><br><br>
+              </div>
+              <div class="ui-g-6" style = "text-align: center;">
+                <button (click)='showCandle()' class="btn" style="background-color:rgb(12, 15, 15); color:white;">Candlestick</button><br><br>
+              </div>
+
+        </div>
+
+          <div *ngIf="no==0; else graph">
+              <p class="lead" style="text-align: center; font-size: large;"><strong>Pick a stock to continue</strong></p>
+          </div>
+          <div class="ui-g-12" (window:resize) = "windowSize($event)" style="text-align: center;">
+
+              <ng-template #graph>
+                <div  style="margin-left: 5%; margin-right: 5%;">
+                <google-chart #chart
+                [title]="title"
+                [type]="type"
+                [data]= "data"
+                [columns] = "columns"
+                [options]="options"
+                [width]="width"
+                [height]="height">
+              </google-chart>
+              </div>
+              </ng-template>
+
+        </div>
+        </div>
+
+      </p-card>
+    </div>
+  </div>
+
+</div>

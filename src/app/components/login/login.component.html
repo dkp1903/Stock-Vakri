@@ -1,0 +1,26 @@
+<div class="container">
+    <p-card>
+    <h1 >  
+    
+        Sign In <img src="assets/images/db.png" alt="Deutsche Bank" height="80" align="right"> 
+        </h1>
+        <br><br>
+    <form (submit) = "onLoginSubmit()">
+
+    <div class="form-group">
+        <label for="username">Email </label>
+        <input type="text"  [(ngModel)]="username" name="username" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password"  [(ngModel)]="password" name="password" class="form-control">
+    </div>
+
+    <button type="submit" class="btn" style="background-color:rgb(18, 55, 68); color:white">Submit</button>
+
+    </form>
+</p-card>
+</div>
+
+

@@ -1,0 +1,12 @@
+.ui-g{
+    background-color:#3e3f3a;
+    margin-bottom: 15px;
+}
+a{
+    color: white;
+}
+a:hover{
+    font-weight: 900;
+    color: white;
+}
+

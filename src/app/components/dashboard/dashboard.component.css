@@ -1,0 +1,56 @@
+/* .header {
+    text-align: center;
+}
+
+.header h1 {
+    font-family: serif;
+    font-size: 38px; 
+    font-family: 'Times New Roman';
+}
+
+.content {
+    margin: 100px;
+}
+
+.margin25 {
+    margin: 25px;
+} */
+
+.upload {
+    cursor: pointer;
+}
+.btn:hover{
+    font-weight:700;
+}
+/* .btn-file {
+    position: relative;
+    overflow: hidden;
+  } */
+  .btn-file input[type=file] {
+    /* position: absolute; */
+    top: 0; 
+    right: 0;
+    /* min-width: 100%; */
+    /* min-height: 100%; */
+    /* font-size: 100px; */
+    text-align: right;
+    /* filter: alpha(opacity=0); */
+    /* opacity: 0; */
+    /* outline: none; */
+    /* background: white; */
+    cursor: inherit;
+    display: block;
+  }
+
+::ng-deep .you {
+background-color: rgb(18, 55, 68) !important;
+color:  rgb(252, 252, 252) !important;
+}
+::ng-deep .you:hover{
+    font-weight: 800;
+}
+
+.et_pb_button {
+    display: inline-block;
+    margin: 5px; /* space between buttons */
+}

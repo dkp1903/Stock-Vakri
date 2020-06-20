@@ -1,0 +1,60 @@
+<div class="ui-g" style="margin-left: 18%; margin-right: 20%; text-align: center;">
+  <div style=" width: 100%; margin-bottom: 5%;">
+    <p-card header="Category">
+        <div class="ui-g" >
+                <div class="ui-g-6">
+                  <p class="lead" style="font-size: medium;"><strong>Select:</strong></p>
+                    <select
+                      [(ngModel)] = "type"
+                      (ngModelChange) = 'catcher($event)'>
+                        <option
+                          *ngFor="let s of types"
+                          [value]="s">
+                          <p >{{s}}</p>
+                        </option>
+                    </select>
+                </div>
+                <div class="ui-g-6" style="text-align: center;">
+
+                      <form (submit) = 'addQuery()'>
+                        <p class="lead" style="font-size: medium; margin-right: 50%;"><strong>Or add one:</strong></p>
+                              <input style = "max-width: 150px; max-height: 20px; " type="text" [(ngModel)]="query" name="type" class="form-control" placeholder="Query(No spaces)">
+
+                            <!-- <div class="ui-g-6">
+                              <button type="submit"  class="btn" style="background-color:rgb(18, 55, 68); color:white">Submit</button>
+                            </div> -->
+                      </form>
+
+                </div>
+
+            </div>
+
+      </p-card>
+    </div>
+    <br>
+    <div style="text-align: center; margin-left: 30%;">
+      <p class="lead" >Showing news in category: {{type}}</p>
+    </div>
+  <div *ngFor="let post of news.articles" style="margin-left: 12%; margin-right: 12%; max-width: 800px; margin-bottom: 5%;">
+
+    <a href={{post.url}} target="_blank">
+    <p-card>
+    <div class="ui-g">
+          <div class="ui-g-4">
+              <img src="{{post.image}}" style="width: 100%; height: auto; max-width: 300px;">
+          </div>
+      <div class="ui-g-8 ui-g-nopad">
+            <div class = "ui-g-12" style="font-size: large;">
+              <strong>{{post.title}}</strong>
+            </div>
+            <div class="ui-g-12">
+              <p>{{post.description}}</p>
+            </div>
+
+          </div>
+
+
+    </div>
+  </p-card></a>
+  </div>
+</div>
